@@ -1,8 +1,112 @@
-@import "tailwindcss";
-
 :root {
+  --font-size-base: 16px;
+  --font-size-headings: 1.5rem;
+
+  /* Grunn bilið okkar er 1rem == 16px */
+  --spacing: 1rem;
+
+  /* Hámarks og lágmarks breidd á efni */
+  --max-width: 1100px;
+
+  /* Hæð á nav */
+  --height-nav: 4rem;
+
+  /* Grind */
+  --columns: 12;
+  --gutter: 30px;
+
+  /* Bil á milli „stærri“ eininga (header, efnisbox, footer) */
+  --vertical-space-small: calc(var(--gutter) * 1);
+  --vertical-space-large: calc(var(--gutter) * 1.5);
+  --vertical-space: var(--vertical-space-small);
+
+  /* Border breiddir */
+  --border-nav: 2px solid var(--color-background-secondary);
+  --border-radius-regular: 5px;
+
+  /* Litir */
+  --color-background-primary: #fff;
+  --color-background-secondary: #000;
+  --color-accent: #f99;
+  --color-protection: rgb(0 0 0 / 35%);
+  --color-background-nav-og-footer: #8be951;
+  --color-font-nav: green;
+
+  /* Letur stillingar */
+  --font-base-size: 1rem;
+  --font-family-base: "Gelasio", "Georgia", serif;
+  --font-family-heading: "Atkinson Hyperlegible", "Courier New", monospace;
+  
+
+
+  /* GRIIIIIID */
+  --grid-color: hsl(255deg 75% 75% / 25%);
+  --grid-repeating-width: calc(100% / var(--columns));
+  --grid-column-width: calc((100% / var(--columns)) - var(--gutter));
+  --grid-background-width: calc(100% + var(--gutter));
   --background: #ffffff;
   --foreground: #171717;
+  --grid-background-columns: repeating-linear-gradient(
+    to right,
+    var(--grid-color),
+    var(--grid-color) var(--grid-column-width),
+    transparent var(--grid-column-width),
+    transparent var(--grid-repeating-width)
+  );
+}
+
+@media (width >= 700px) {
+  :root {
+    --vertical-space: var(--vertical-space-large);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background-primary: #000;
+    --color-background-secondary: #fff;
+    --color-accent: #600;
+    --color-protection: rgb(255 255 255 / 50%);
+  }
+}
+/** Meginmál og efni forsíðu **/
+html,body{
+  margin:0;
+  padding:0;
+}
+
+main {
+  /* Notum grid hér til að setja upp bil á milli header, meginmáls og fóts */
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 100%;
+  gap: var(--spacing);
+  justify-items: center;
+}
+
+main > section {
+  width: 100%;
+}
+
+
+.wrapper {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 100%;
+  gap: var(--vertical-space);
+
+  /* grid items eru miðjuð */
+  justify-items: center;
+  width: 100%;
+  min-height: 100vh;
+
+  /* pláss fyrir nav, það er nákvæmlega svona hátt */
+  margin-top: var(--height-nav);
+  background-color: var(--color-background-primary);
+}
+
+.wrapper main {
+  flex: 1;
 }
 
 @theme inline {
@@ -12,15 +116,109 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.navBar {
+  display: flex;
+  align-items: center; 
+  justify-content: space-between; 
+  padding: calc(0.5*var(--spacing)) calc(2*var(--spacing));
+  border-bottom: 1px solid var(--color-background-secondary);
+  background-color: var(--color-background-nav-og-footer);
+}
+
+.navImage img {
+  object-fit: contain;
+  width: 100%;
+}
+
+.navMenu {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.nav-link {
+  color: var(--color-background-secondary);
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.nav-link:hover {
+  color: var(--color-font-nav);
+}
+
+.nav-active {
+  font-weight: bold;
+  color: var(--color-font-nav);
+}
+
+/*FOOOOTER*/
+footer {
+  padding: var(--spacing);
+  background-color: var(--color-background-nav-og-footer);
+  border-top: 1px solid var(--color-background-secondary);
+}
+
+footer .content {
+  display: grid;
+  gap: calc(2*var(--spacing));
+
+  grid-template-columns: 1fr;
+}
+
+.footer-section {
+  text-align: center;
+}
+
+footer h2 {
+  margin-bottom: calc(var(--spacing));
+  font-size: var(--font-size-headings);
+}
+
+footer h3 {
+  margin-top: var(--spacing);
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer ul li {
+  margin-bottom: calc(0.5* var(--spacing));
+}
+
+footer a {
+  color: blue;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+footer dl {
+  margin: 0;
+  padding: 0;
+}
+
+footer dt,
+footer dd {
+  margin: 0;
+  padding: 0;
+}
+
+
+@media (min-width: 700px) {
+  footer .content {
+    grid-template-columns: repeat(3, 1fr);
+    text-align: left;
+  }
 }
