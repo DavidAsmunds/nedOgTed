@@ -20,43 +20,12 @@ function GetDataButton() {
     </div>
   );
 }
-/*
-function PostDataForm(){
-  async function handlePostToDB() {
-    const response = await fetch("http://localhost:8080/application",{
-      method: "POST",
-      headers: { "Content-Type" : "application/json" },
-      body: JSON.stringify({
-        name:"react",
-        kennitala: "kennitala",
-        phonenumber: "1230001",
-        generalemail: "testemail@gmail.is",
-        uniemail: "testemail@hi.is"
-      })
-    });
-    const data = await response.json();
-    console.log("gogn inserted: ", data)
-  }
 
-  return (
-    <div>
-      <button onClick={handlePostToDB}>
-        profa post
-      </button>
-    </div>
-  );
-}*/
-//<PostDataForm />
 export default function Home() {
   return (
     <div>
-      <h1>Welcome to my app</h1>
+      <h1>Verið velkomin á heimasíðu ned og ted!</h1>
       <GetDataButton />
-
-      <div>
-        <h2>post request takki</h2>  
-        
-      </div>
     </div>
 
   );

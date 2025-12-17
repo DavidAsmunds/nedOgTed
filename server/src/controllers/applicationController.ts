@@ -7,8 +7,13 @@ export async function postApplication(req: Request, res: Response) {
         const data: ApplicationCreate = req.body;
         const created = await service.createNewApplication(data);
         return res.status(201).json(created);
-    } catch (err) {
-        console.error("postApplication error:", err);
+    } catch (err: any) {
+        console.error("postApplication error: ", err);
+
+        if (err instanceof Error) {
+            return res.status(400).json({ error: err.message });
+        }
+        
         return res.status(500).json("postApplication error");
     }
 }

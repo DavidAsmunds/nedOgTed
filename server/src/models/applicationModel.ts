@@ -16,6 +16,14 @@ export async function createApplication(data:ApplicationCreate): Promise<Applica
         throw new Error("missing fields in the createApplication request");
     }
 
+    if (data.kennitala.trim().length !==10) {
+        throw new Error("kennitala has to be 10 digits");
+    }
+
+    if (data.phoneNumber.trim().length !== 7) {
+        throw new Error("phonenumber has to be 7 digits");
+    }
+
     const query = `
         INSERT INTO application (name, kennitala, phoneNumber, generalEmail, uniEmail)
         VALUES ($1, $2, $3, $4, $5)
