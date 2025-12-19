@@ -11,31 +11,34 @@ export default function Navbar(){
     const linkClasses = (path) => pathname === path ? "nav-link nav-active" : "nav-link";
 
     return(
-        <div className="navBar">
-            <div className = "navImage">
-                <Link href="/">
-                    <Image
-                        src="/nedogtedLogo.png"
-                        alt="Ned & Ted Logo"
-                        width={50}
-                        height={50}
-                    />
-                </Link>
-            </div>
-            <nav className="navMenu">
-                <div className="navLinks">
-                    <Link href="/" className={linkClasses("/")}> Heimasíða </Link>
+        <nav className="nav-bar">
+            <div className="nav-inner">
+                <div className = "nav-image">
+                    <Link href="/">
+                        <Image
+                            src="/nedogtedLogo.png"
+                            alt="Ned & Ted Logo"
+                            width={75}
+                            height={75}
+                        />
+                    </Link>
                 </div>
+                <div className="nav-menu">
+                    <div className="nav-links">
+                        <Link href="/" className={linkClasses("/")}> Heimasíða </Link>
+                    </div>
 
-                <div className="navLinks">
-                    <Link href="/about" className={linkClasses("/about")}> Um okkur</Link>
-                </div>
+                    <div className="nav-links">
+                        <Link href="/about" className={linkClasses("/about")}> Um okkur</Link>
+                    </div>
 
-                <div className="navLinks">
-                    <Link href="/signup" className={linkClasses("/signup")}> Félagsskráning </Link>
+                    <div className="nav-links">
+                        <Link href="/signup" className={linkClasses("/signup")}> Félagsskráning </Link>
+                    </div>
+                    
                 </div>
                 
-            </nav>
-        </div>
+            </div>
+        </nav>
     );
 }

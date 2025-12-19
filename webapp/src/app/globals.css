@@ -1,30 +1,28 @@
 :root {
-  --font-size-base: 16px;
-  --font-size-headings: 1.5rem;
-
-  /* Grunn bilið okkar er 1rem == 16px */
+  /* base scaling 16px */
   --spacing: 1rem;
 
-  /* Hámarks og lágmarks breidd á efni */
+  /* maxwidth */
   --max-width: 1100px;
 
-  /* Hæð á nav */
+  /* nav */
   --height-nav: 4rem;
 
-  /* Grind */
+  /* grid */
   --columns: 12;
   --gutter: 30px;
+  --offset: 20px;
 
-  /* Bil á milli „stærri“ eininga (header, efnisbox, footer) */
+  /* space between bigger things (header, efnisbox, footer) */
   --vertical-space-small: calc(var(--gutter) * 1);
   --vertical-space-large: calc(var(--gutter) * 1.5);
   --vertical-space: var(--vertical-space-small);
 
-  /* Border breiddir */
+  /* border widths */
   --border-nav: 2px solid var(--color-background-secondary);
   --border-radius-regular: 5px;
 
-  /* Litir */
+  /* colors */
   --color-background-primary: #fff;
   --color-background-secondary: #000;
   --color-accent: #f99;
@@ -32,14 +30,19 @@
   --color-background-nav-og-footer: #8be951;
   --color-font-nav: green;
 
-  /* Letur stillingar */
-  --font-base-size: 1rem;
+  /* letter settings */
+  --font-size-base: 1rem;
+  --font-size-headings: 1.5rem;
+  --font-weight-bold: bold;
+
   --font-family-base: "Gelasio", "Georgia", serif;
   --font-family-heading: "Atkinson Hyperlegible", "Courier New", monospace;
   
-
-
   /* GRIIIIIID */
+
+  /* width of content with offset */
+  --width-offset: calc(100% - (2 * var(--offset)));
+
   --grid-color: hsl(255deg 75% 75% / 25%);
   --grid-repeating-width: calc(100% / var(--columns));
   --grid-column-width: calc((100% / var(--columns)) - var(--gutter));
@@ -69,82 +72,156 @@
     --color-protection: rgb(255 255 255 / 50%);
   }
 }
-/** Meginmál og efni forsíðu **/
+
+
 html,body{
   margin:0;
   padding:0;
+  font-size: var(--font-size-base);
+  color: var(--color-background-secondary);
 }
 
-main {
-  /* Notum grid hér til að setja upp bil á milli header, meginmáls og fóts */
+/** pictures never take more space than the parent allows **/
+img {
+  max-width: 100%;
+}
+
+/** color of links is inhereted **/
+a {
+  color: inherit;
+}
+
+/** font size is inherited **/
+input,
+button,
+select {
+  font-size: inherit;
+}
+
+/** basic button**/
+button {
+  display: inline-block;
+  padding: calc(var(--spacing) * 0.5) var(--spacing);
+  font-size: 1rem;
+  color: var(--color-background-primary);
+  text-decoration: none;
+  background-color: var(--color-background-secondary);
+  border: 0;
+  border-radius: var(--border-radius-regular);
+
+  margin-top: calc(2* var(--spacing));
+  margin-bottom: var(--spacing);
+}
+
+body.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/*
+.wrapper{
+  flex: 1;
+  width: 100%;
+  background-color: var(--color-background-primary);
+
   display: grid;
-  grid-template-rows: auto;
-  grid-template-columns: 100%;
-  gap: var(--spacing);
-  justify-items: center;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--gutter);
+  width: 100%;
+  margin: 0 auto;
+}*/
+
+/*
+.wrapper {
+  flex: 1;
+  width: calc(100% - (2 * var(--offset)));
+  max-width: var(--max-width);
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: repeat(var(--columns), 1fr);
+  column-gap: var(--gutter);
+  row-gap: var(--vertical-space);
+}*/
+
+.wrapper{
+  flex: 1;
+  width: var(--width-offset);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+}
+
+main{
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(var(--columns), 1fr);
+  column-gap: var(--gutter);
+  row-gap: var(--vertical-space);
 }
 
 main > section {
+  grid-column: 1 / -1; 
   width: 100%;
 }
 
 
-.wrapper {
-  display: grid;
-  grid-template-rows: auto;
-  grid-template-columns: 100%;
-  gap: var(--vertical-space);
 
-  /* grid items eru miðjuð */
-  justify-items: center;
-  width: 100%;
-  min-height: 100vh;
-
-  /* pláss fyrir nav, það er nákvæmlega svona hátt */
-  margin-top: var(--height-nav);
-  background-color: var(--color-background-primary);
-}
-
-.wrapper main {
-  flex: 1;
-}
-
+/*
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
+*/
 
 
+/** section **/
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.content section {
+  margin-bottom: var(--spacing);
 }
 
-.navBar {
-  display: flex;
-  align-items: center; 
-  justify-content: space-between; 
-  padding: calc(0.5*var(--spacing)) calc(2*var(--spacing));
-  border-bottom: 1px solid var(--color-background-secondary);
+
+/* NAV*/
+.nav-bar {
+  width: 100%;
+  height: var(--height-nav);
   background-color: var(--color-background-nav-og-footer);
+  border-bottom: 1px solid var(--color-background-secondary);
+
+  display: flex;
+  align-items: center;
 }
 
-.navImage img {
+.nav-inner{
+  width: var(--width-offset);
+  max-width: var(--max-width);
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-image img {
   object-fit: contain;
   width: 100%;
 }
 
-.navMenu {
+.nav-menu {
   display: flex;
   align-items: center;
   gap: 30px;
 }
 
-.nav-link {
+.nav-links {
   color: var(--color-background-secondary);
   text-decoration: none;
   font-size: 18px;
@@ -155,17 +232,23 @@ body {
 }
 
 .nav-active {
-  font-weight: bold;
+  font-weight: var(--font-weight-bold);
   color: var(--color-font-nav);
 }
 
 /*FOOOOTER*/
+
 footer {
+  width: 100%;
   background-color: var(--color-background-nav-og-footer);
   border-top: 1px solid var(--color-background-secondary);
 }
 
 footer .content {
+  width: var(--width-offset);
+  max-width: var(--max-width);
+  margin: 0 auto;
+
   display: grid;
   gap: calc(2*var(--spacing));
 
@@ -222,14 +305,178 @@ footer dd {
   }
 }
 
-body.layout {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+
+/* signup section */
+.signup-section {
+  /* takes full width of main's grid */
+  grid-column: 1 / -1; 
+  display: grid;
+
+  /* make the section also a 12-col grid for its children */
+  grid-template-columns: repeat(var(--columns), 1fr);
+  column-gap: var(--gutter);
 }
 
-/* Make main fill leftover space */
-main.main{
-  flex: 1;
+.signup-form {
+  grid-column: 1 / span 6;
+
+  border: 1px solid var(--color-background-secondary);
+  border-radius: var(--border-radius-regular);
+  
+  padding: var(--spacing);
+  background-color: var(--color-background-primary);
+  
+  display: grid;
+  gap: calc(var(--spacing) * 0.75);
+
+  margin: var(--spacing) 0;
+}
+
+.signup-form label {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.signup-form input {
+  display: block;
   width: 100%;
+  padding: calc(var(--spacing) * 0.5);
+  border: 1px solid var(--color-background-secondary);
+  border-radius: var(--border-radius-regular);
+  box-sizing: border-box;
+}
+
+.signup-form-title{
+  text-align: center;
+  font-size: var(--font-size-heading);
+  font-weight: var(--font-weight-bold);
+}
+
+.signup-form-row{
+  display: grid;
+
+  /* label width + input width makes a whole row, its ished for now */
+  grid-template-columns: 1fr 4fr;
+  align-items: center;
+  column-gap: var(--spacing);
+}
+
+/*
+.signup-image {
+  grid-column: 7 / span 6;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  
+  width: 100%;
+ 
+
+  position: relative;
+
+  max-width: 500px;         
+  margin: 0 auto;
+}
+*/
+
+.signup-right-side{
+  grid-column: 7 / span 6;
+
+  display: grid;
+  grid-template-rows: auto 1fr; /* text takes what it needs, logo gets rest */
+  gap: var(--spacing);
+
+  align-items: start;
+}
+
+.signup-image-content{
+  text-align: left; /* or center if you prefer */
+}
+
+.signup-image{
+  position: relative;  /* REQUIRED for Image fill */
+  width: 100%;
+  min-height: 320px;   /* control logo area height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Settings */
+:root {
+  --offset: 1.5rem;
+  --max-width: 72rem;
+  --columns: 6;
+  --gutter: .5rem;
+  --baseline: 3rem;
+  --baseline-shift: 2rem;
+  --color: hsla(204, 80%, 72%, 0.25);
+}
+
+@media (min-width: 35em) {
+  :root {
+    --offset: 2rem;
+    --gutter: .75rem;
+    --color: hsla(286, 51%, 44%, 0.25);
+  }
+}
+
+@media (min-width: 48em) {
+  :root {
+    --offset: 3rem;
+    --columns: 12;
+    --gutter: 1rem;
+    --color: hsla(204, 80%, 72%, 0.25);
+  }
+}
+
+@media (min-width: 70em) {
+  :root {
+    --offset: 4rem;
+    --color: hsla(286, 51%, 44%, 0.25);
+  }
+}
+
+
+/* Helper variables */
+:root {
+  --repeating-width: calc(100% / var(--columns));
+  --column-width: calc((100% / var(--columns)) - var(--gutter));
+  --background-width: calc(100% + var(--gutter));
+  --background-columns: repeating-linear-gradient(
+    to right,
+    var(--color),
+    var(--color) var(--column-width),
+    transparent var(--column-width),
+    transparent var(--repeating-width)
+  );
+  --background-baseline: repeating-linear-gradient(
+    to bottom,
+    var(--color),
+    var(--color) 1px,
+    transparent 1px,
+    transparent var(--baseline)
+  );
+}
+
+html {
+  position: relative;
+}
+
+html::before {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  width: calc(100% - (2 * var(--offset)));
+  max-width: var(--max-width);
+  min-height: 100vh;
+  content: '';
+  background-image: var(--background-columns);  
+  background-size: var(--background-width) 100%;
+  z-index: 1000;
+  pointer-events: none;
 }

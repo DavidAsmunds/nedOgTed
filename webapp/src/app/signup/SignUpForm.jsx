@@ -47,27 +47,44 @@ export default function SignUpForm(){
     }
 
     return (
-        <>
-            <form onSubmit={handlePostDataForm}>
+        <form onSubmit={handlePostDataForm} className="signup-form">
+            <div className="signup-form-title"> 
+                <h2> Félagsskráning </h2>
+            </div>
+
+            <div className="signup-form-row">
                 <label htmlFor="name"> Nafn: </label>
-                <input type="text" id="name" name="name" required placeholder="t.d. Jón Jónsson"></input>
+                <input type="text" id="name" name="name" required className="form-signup-text" 
+                    placeholder="t.d. Jón Jónsson" />
+            </div>
 
+            <div className="signup-form-row">
                 <label htmlFor="kennitala"> Kennitala: </label>
-                <input type="text" id="kennitala" name="kennitala" required placeholder="000000-0000"></input>
+                <input type="text" id="kennitala" name="kennitala" required
+                    className="form-signup-text" placeholder="000000-0000" />
+            </div>
 
+            <div className="signup-form-row">
                 <label htmlFor="phoneNumber"> Símanúmer: </label>
-                <input type="text" id="phoneNumber" name="phoneNumber" required placeholder="5812345"></input>
+                <input type="text" id="phoneNumber" name="phoneNumber" required 
+                    className="form-signup-text" placeholder="5812345" />
+            </div>
 
+            <div className="signup-form-row">
                 <label htmlFor="generalEmail"> Netfang: </label>
-                <input type="text" id="generalEmail" name="generalEmail" required placeholder="t.d. gmail@gmail.is"></input>
+                <input type="text" id="generalEmail" name="generalEmail" required
+                    className="form-signup-text" placeholder="t.d. gmail@gmail.is" />
+            </div>
 
+            <div className="signup-form-row">
                 <label htmlFor="uniEmail"> Skólanetfang: </label>
-                <input type="text" id="uniEmail" name="uniEmail" required placeholder="t.d. daa@hi.is"></input>
+                <input type="text" id="uniEmail" name="uniEmail" required className="form-signup-text" 
+                    placeholder="t.d. daa@hi.is"/>
+            </div>
 
-                <button type="submit">
-                    Submit
-                </button>
-            </form>
-        </>
+            <button type="submit">
+                Submit
+            </button>
+        </form>
     );
 }

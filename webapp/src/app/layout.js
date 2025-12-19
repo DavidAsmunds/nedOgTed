@@ -24,8 +24,10 @@ export default function RootLayout({ children }) {
     <html lang="is">
       <body className="layout">
         <Navbar />
-        <main className="main">{children}</main>
-        <Footer />
+        <div className="wrapper">
+          <main>{children}</main>
+        </div>
+        <Footer/>
       </body>
     </html>
   );

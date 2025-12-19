@@ -23,10 +23,10 @@ function GetDataButton() {
 
 export default function Home() {
   return (
-    <div>
+    <section>
       <h1>Verið velkomin á heimasíðu ned og ted!</h1>
       <GetDataButton />
-    </div>
+    </section>
 
   );
 }
