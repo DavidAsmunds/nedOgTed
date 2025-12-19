@@ -43,7 +43,7 @@ export async function createApplication(data:ApplicationCreate): Promise<Applica
 
 export async function getAllApplications(): Promise<Application[]> {
     try{
-        const result = await pool.query("SELECT * FROM application;");
+        const result = await pool.query<Application>("SELECT * FROM application;");
         return result.rows;
     }
     catch(err){

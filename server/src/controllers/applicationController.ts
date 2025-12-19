@@ -1,4 +1,4 @@
-import { application, Request, Response } from "express";
+import { Request, Response } from "express";
 import * as service from "../services/applicationService";
 import { ApplicationCreate } from "../interfaces/Application.type";
 

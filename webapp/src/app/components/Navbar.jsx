@@ -33,6 +33,10 @@ export default function Navbar(){
                     </div>
 
                     <div className="nav-links">
+                        <Link href="/meetings" className={linkClasses("/meetings")}> Fundir </Link>
+                    </div>
+
+                    <div className="nav-links">
                         <Link href="/signup" className={linkClasses("/signup")}> Félagsskráning </Link>
                     </div>
                     

@@ -6,6 +6,4 @@ export interface ApplicationCreate {
   uniEmail: string;
 };
 
-export interface Application extends ApplicationCreate {
-  id: number;
-}
+export type Application = ApplicationCreate & { id: number };

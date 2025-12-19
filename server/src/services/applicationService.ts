@@ -1,4 +1,4 @@
-import { Application, ApplicationCreate } from "../interfaces/Application.type";
+import type {Application,ApplicationCreate } from "../interfaces/Application.type";
 import * as model from "../models/applicationModel";
 
 export async function createNewApplication(data: ApplicationCreate): Promise<Application> {
