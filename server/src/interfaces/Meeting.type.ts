@@ -6,10 +6,11 @@ export interface MeetingCreate {
     status: MeetingStatus;
 };
 
+//using timestamptz in database
+
 export type Meeting = {id: number} & MeetingCreate;
 
 export type MeetingUpdate =  { id: number } & Partial<MeetingCreate>;
-
 
 enum MeetingStatus {
     Cancelled = "cancelled",

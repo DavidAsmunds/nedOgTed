@@ -13,6 +13,7 @@ router.get("/application/:id", applicationController.getApplicationById);
 //meetings
 router.get("/meeting/", meetingController.getAllMeetings);
 router.get("/meeting/:id", meetingController.getMeetingById)
+router.post("/meeting/", meetingController.postMeeting)
 
 
 export default router;

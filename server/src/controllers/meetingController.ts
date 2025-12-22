@@ -1,8 +1,25 @@
 import { Request, Response } from "express";
 import * as service from "../services/meetingService";
 import { MeetingCreate } from "../interfaces/Meeting.type";
+import { createMeeting } from "../models/meetingModel";
 
 export async function postMeeting(req: Request, res: Response){
+    try{
+        //have to validate dateAndTime input first, as its a Date object
+
+        const data: MeetingCreate = req.body;
+        const createdMeeting = await service.createNewMeeting(data);
+        return res.status(201).json(createdMeeting);
+    }
+    catch(err: any){
+        console.log("postMeeting error: ", err);
+
+        if (err instanceof Error) {
+            return res.status(400).json({ error: err.message });
+        }
+        
+        return res.status(500).json("postMeeting error");
+    }
 
 }
 
