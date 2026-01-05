@@ -33,13 +33,60 @@ export async function createMeeting(data: MeetingCreate): Promise<Meeting> {
 }
 
 export async function updateMeeting(data: MeetingUpdate): Promise<Meeting> {
-    const result = await pool.query<Meeting>("SELECT * FROM meeting ORDER BY id ASC LIMIT 1;");
-    if (result.rows.length === 0) throw new Error("No meetings in DB");
+    const meetingId = data.id;
+
+    let i =0;
+    const values = [];
+    const used =[];
+
+    //check if meeting exists
+    if(getMeetingById(meetingId) === null){
+        console.log("meeting id does not exist in database");
+        throw new Error;
+    }
+
+    for(const value in data){
+        if(value !== null){
+            values.push(value);
+        }
+    }
+
+    if(values.keys()){
+        console.log("nothing to update")
+    }
+
+    const query = `
+        UPDATE meeting (title, longDescription, shortDescription, dateAndTime, status)
+        SET 
+        VALUES ($1, $2, $3, $4, $5)
+        WHERE id =
+        RETURNING *;
+    `;
+
+    const result = await pool.query<Meeting>("SELECT * FROM meeting;");
     return result.rows[0];
+    
 }
 
 export async function deleteMeeting(id: number): Promise<string>{
-    return "wa";
+    if(getMeetingById(id) === null){
+        console.log("meeting id does not exist in database");
+        throw new Error;
+    }
+
+    const query =`
+        DELETE FROM meeting    
+        WHERE id = $1
+    `;
+
+    try{
+        await pool.query(query,[id]);
+        return `meeting with id: ${id} was successfully deleted`;
+    }
+    catch(err){
+        console.log("deleteMeeting db error");
+        throw err;
+    }
 }
 
 

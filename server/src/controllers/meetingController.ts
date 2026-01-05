@@ -28,7 +28,19 @@ export async function updateMeeting(req: Request, res: Response){
 }
 
 export async function deleteMeeting(req: Request, res: Response){
+    try{
+        if(!req.params.id){
+            return res.status(400).json({ error: "id parameter is missing"});
+        }
 
+        const id = Number(req.params.id);
+        const deletedMeeting = await service.deleteMeeting(id);
+        return res.status(200).json(deletedMeeting);
+    }
+    catch(err){
+        console.log(err);
+        return res.status(500).json({ error: "Failed to fetch meetings" });
+    }
 }
 
 export async function getAllMeetings(req: Request, res: Response){
