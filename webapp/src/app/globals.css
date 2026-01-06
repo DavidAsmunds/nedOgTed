@@ -404,6 +404,10 @@ footer dd {
   align-items: center;
 }
 
+.signup-submitted{
+  grid-column: 1 / span 6;
+  align-content: center;
+}
 
 /* Settings */
 :root {

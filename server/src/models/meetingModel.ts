@@ -5,9 +5,9 @@ import pool from "../db";
 export async function createMeeting(data: MeetingCreate): Promise<Meeting> {
     const values = [
         data.title,
-        data.longDescription,
-        data.shortDescription,
-        data.dateAndTime,
+        data.long_description,
+        data.short_description,
+        data.date_and_time,
         data.status,
     ];
 
@@ -17,7 +17,7 @@ export async function createMeeting(data: MeetingCreate): Promise<Meeting> {
     }
 
     const query = `
-        INSERT INTO meeting (title, longDescription, shortDescription, dateAndTime, status)
+        INSERT INTO meeting (title, long_description, short_description, date_and_time, status)
         VALUES ($1, $2, $3, $4, $5)
         RETURNING *;
     `;
@@ -33,39 +33,72 @@ export async function createMeeting(data: MeetingCreate): Promise<Meeting> {
 }
 
 export async function updateMeeting(data: MeetingUpdate): Promise<Meeting> {
-    const meetingId = data.id;
-
-    let i =0;
-    const values = [];
-    const used =[];
+    const id = data.id;
 
     //check if meeting exists
-    if(getMeetingById(meetingId) === null){
+    if(getMeetingById(id) === null){
         console.log("meeting id does not exist in database");
         throw new Error;
     }
 
-    for(const value in data){
-        if(value !== null){
-            values.push(value);
-        }
+    //will use these two to construct the query of what has to be updated
+    var sets = [];
+    var values = [];
+    
+    // this is for the $1, $2... in the query
+    var i = 2;
+
+    // set the first value of the array as the id
+    values.push(id);
+
+    // then add data if present, as everything in the meeting is partial aside from the id
+    if(data.title !== undefined){
+        sets.push(`title = $${i}`);
+        values.push(data.title);
+        i++;
     }
 
-    if(values.keys()){
-        console.log("nothing to update")
+    if(data.long_description !== undefined){
+        sets.push(`long_description = $${i}`);
+        values.push(data.long_description);
+        i++;
+    }
+
+    if(data.short_description !== undefined){
+        sets.push(`short_description = $${i}`);
+        values.push(data.short_description);
+        i++;
+    }
+
+    if(data.date_and_time !== undefined){
+        sets.push(`date_and_time = $${i}`);
+        values.push(data.date_and_time);
+        i++;
+    }
+
+    if(data.status !== undefined){
+        sets.push(`status = $${i}`);
+        values.push(data.status);
     }
 
     const query = `
-        UPDATE meeting (title, longDescription, shortDescription, dateAndTime, status)
-        SET 
-        VALUES ($1, $2, $3, $4, $5)
-        WHERE id =
+        UPDATE meeting
+        SET ${sets.join(", ")}
+        WHERE id = $1
         RETURNING *;
     `;
 
-    const result = await pool.query<Meeting>("SELECT * FROM meeting;");
-    return result.rows[0];
-    
+    try{
+        const result = await pool.query<Meeting>(query,values);
+        /*console.log(values);
+        console.log(query);
+        console.log(data);*/
+        return result.rows[0];
+    }
+    catch(err){
+        console.log("updateMeeting() db err: ", err);
+        throw err;
+    }
 }
 
 export async function deleteMeeting(id: number): Promise<string>{
@@ -84,7 +117,7 @@ export async function deleteMeeting(id: number): Promise<string>{
         return `meeting with id: ${id} was successfully deleted`;
     }
     catch(err){
-        console.log("deleteMeeting db error");
+        console.log("deleteMeeting db error", err);
         throw err;
     }
 }

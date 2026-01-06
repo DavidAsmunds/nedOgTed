@@ -6,9 +6,9 @@ export async function createApplication(data:ApplicationCreate): Promise<Applica
     const values = [
         data.name,
         data.kennitala,
-        data.phoneNumber,
-        data.generalEmail,
-        data.uniEmail
+        data.phone_number,
+        data.general_email,
+        data.uni_email
     ];
 
     //checking if any required field is empty, db has null checks but better to not call it if needed
@@ -20,12 +20,12 @@ export async function createApplication(data:ApplicationCreate): Promise<Applica
         throw new Error("kennitala has to be 10 digits");
     }
 
-    if (data.phoneNumber.trim().length !== 7) {
+    if (data.phone_number.trim().length !== 7) {
         throw new Error("phonenumber has to be 7 digits");
     }
 
     const query = `
-        INSERT INTO application (name, kennitala, phoneNumber, generalEmail, uniEmail)
+        INSERT INTO application (name, kennitala, phone_number, general_email, uni_email)
         VALUES ($1, $2, $3, $4, $5)
         RETURNING *;
     `;

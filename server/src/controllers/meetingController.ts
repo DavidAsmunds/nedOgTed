@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import * as service from "../services/meetingService";
-import { MeetingCreate } from "../interfaces/Meeting.type";
-import { createMeeting } from "../models/meetingModel";
+import { MeetingCreate, MeetingUpdate } from "../interfaces/Meeting.type";
 
 export async function postMeeting(req: Request, res: Response){
     try{
@@ -24,7 +23,18 @@ export async function postMeeting(req: Request, res: Response){
 }
 
 export async function updateMeeting(req: Request, res: Response){
-
+    try{
+        const data: MeetingUpdate = req.body;
+        const updatedMeeting = await service.updateMeeting(data);
+        return res.status(200).json(updatedMeeting);
+    }
+    catch(err){
+        console.log(err);
+        if (err instanceof Error) {
+            return res.status(400).json({ error: err.message });
+        }
+        return res.status(500).json({ error: "Failed to update meeting" });
+    }
 }
 
 export async function deleteMeeting(req: Request, res: Response){
