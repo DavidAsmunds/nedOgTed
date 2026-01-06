@@ -1,3 +1,5 @@
+import MeetingTable from "./MeetingTable";
+
 export default function Meetings(){
     return (
         <section>
@@ -10,6 +12,8 @@ export default function Meetings(){
                 þetta eru mikilvæg skilabop fyrir alla landsmenn, nær og fjær. svaka
                 mikilvæg skilaboð ngl, hvað veit ég um svona mál, takmarkað en hey, þetta er heil lína.
             </p>
+
+            <MeetingTable/>
         
         </section>
     );
