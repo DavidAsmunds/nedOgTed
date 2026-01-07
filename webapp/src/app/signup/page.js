@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function SignUp(){
 
     return (
-        <section className="signup-section">
+        <section className="section">
              
             <SignUpForm className="signup-form"/>
 

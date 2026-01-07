@@ -307,7 +307,7 @@ footer dd {
 
 
 /* signup section */
-.signup-section {
+.section {
   /* takes full width of main's grid */
   grid-column: 1 / -1; 
   display: grid;
@@ -408,6 +408,32 @@ footer dd {
   grid-column: 1 / span 6;
   align-content: center;
 }
+
+
+
+.meeting-content{
+  grid-column: 1 / -1;
+}
+
+.meeting-table{
+  grid-column: 1 / -1;
+  
+}
+
+tr:nth-child(even) { background-color: white; }
+tr:nth-child(odd) { background-color: lightgray; }
+
+.meeting-table-head{
+  font-size: var(--font-family-base);
+  width: 100%;
+}
+
+td {
+
+}
+
+
+
 
 /* Settings */
 :root {
