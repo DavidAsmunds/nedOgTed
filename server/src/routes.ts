@@ -2,7 +2,6 @@ import { Router } from "express";
 import * as applicationController from "./controllers/applicationController";
 import * as meetingController from "./controllers/meetingController";
 
-
 const router = Router();
 
 //application

@@ -125,7 +125,7 @@ export async function deleteMeeting(id: number): Promise<string>{
 
 export async function getAllMeetings(): Promise<Meeting[]> {
     try{
-        const result = await pool.query<Meeting>("SELECT * FROM meeting;");
+        const result = await pool.query<Meeting>("SELECT * FROM meeting ORDER BY date_and_time DESC;");
         return result.rows;
         
     }

@@ -29,7 +29,9 @@ export default function MeetingTableView({meetings}){
     return(
         <table className="meeting-table">
             <caption className="meeting-table-title">  Fyrri og komandi fundir </caption>
-            {meetingTable}
+            <tbody>
+                {meetingTable}
+            </tbody>
         </table>
     );
 }

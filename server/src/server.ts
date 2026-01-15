@@ -1,6 +1,6 @@
 import express, {Request,Response}from "express";
 import cors from "cors";
-import "./db";
+import pool from "./db";
 
 const app = express();
 
@@ -12,5 +12,7 @@ import routes from "./routes";
 //route
 app.use("/", routes);
 
+import startScheduledMeetingUpdate from "./utils/scheduledMeetingUpdate";
+startScheduledMeetingUpdate(pool);
 
 export default app;
