@@ -1,7 +1,7 @@
 export interface MeetingCreate {
     title: string;
     short_description: string;
-    long_description: string;
+    long_description: Text;
     date_and_time: Date;
     status: MeetingStatus;
 };

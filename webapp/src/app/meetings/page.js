@@ -1,5 +1,4 @@
-import MeetingTable from "./MeetingTable";
-import TableListButtons from "./TableListButtons";
+import MeetingTableList from "./MeetingTableList";
 
 export default function Meetings(){
     return (
@@ -13,10 +12,9 @@ export default function Meetings(){
                     þetta eru mikilvæg skilabop fyrir alla landsmenn, nær og fjær. svaka
                     mikilvæg skilaboð ngl, hvað veit ég um svona mál, takmarkað en hey, þetta er heil lína.
                 </p>
-                <TableListButtons/>
             </div>
 
-            <MeetingTable/>
+            <MeetingTableList/>
         
         </section>
     );
