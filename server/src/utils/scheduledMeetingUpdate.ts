@@ -1,7 +1,8 @@
 import cron, { schedule } from "node-cron";
+import { Pool } from "pg";
 
 //Db is just the database to run this on
-export default function startScheduledMeetingUpdate(db) {
+export default function startScheduledMeetingUpdate(db : Pool) {
     //20:04 everyday, second two stars are for date and month
     cron.schedule("04 20 * * *", async () => {
         try{
