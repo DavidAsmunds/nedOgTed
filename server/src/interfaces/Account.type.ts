@@ -7,3 +7,7 @@ export interface AccountCreate{
 }
 
 export type Account = {id:number, isAdmin:boolean} & AccountCreate;
+
+export type updateAccount = {id:number} & Partial<AccountCreate>;
+
+export type makeAccountAdmin = {id:number, isAdmin:boolean } 
