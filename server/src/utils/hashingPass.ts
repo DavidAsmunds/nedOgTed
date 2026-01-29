@@ -1,10 +1,11 @@
 const bcrypt = require('bcrypt');
 
-export function hashNewPassword(password: string) {
-    bcrypt.hash(password,12,(err : Error, hashedPassword : string)=>{
+export function hashNewPassword(password: string) : string {
+    var hashedPass : string;
+    hashedPass = bcrypt.hash(password,12,(err : Error, hashedPassword : string)=>{
         if(err){throw err};
-        return hashedPassword;
     });
+    return hashedPass;
 }
 
 export function compareToHashedPassword(password: string, hashedPassword: string){

@@ -6,9 +6,9 @@ export async function createNewApplication(data: ApplicationCreate): Promise<App
 }
 
 export async function getAllApplications(): Promise<Application[]> {
-  return await model.getAllApplications();
+    return await model.getAllApplications();
 }
 
 export async function getApplicationById(id: number): Promise<Application | null> {
-  return await model.getApplicationById(id);
+    return await model.getApplicationById(id);
 }

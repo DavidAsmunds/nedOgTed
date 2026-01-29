@@ -14,9 +14,9 @@ export async function deleteMeeting(id: number): Promise<string>{
 }
 
 export async function getAllMeetings(): Promise<Meeting[]> {
-  return await model.getAllMeetings();
+    return await model.getAllMeetings();
 }
 
 export async function getMeetingById(id: number): Promise<Meeting | null> {
-  return await model.getMeetingById(id);
+    return await model.getMeetingById(id);
 }
