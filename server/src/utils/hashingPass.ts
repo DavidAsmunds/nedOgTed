@@ -1,10 +1,7 @@
 const bcrypt = require('bcrypt');
 
-export function hashNewPassword(password: string) : string {
-    var hashedPass : string;
-    hashedPass = bcrypt.hash(password,12,(err : Error, hashedPassword : string)=>{
-        if(err){throw err};
-    });
+export async function hashNewPassword(password: string) : Promise<string> {
+    const hashedPass = await bcrypt.hash(password,12)
     return hashedPass;
 }
 
